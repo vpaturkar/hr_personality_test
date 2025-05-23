@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Personality Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="APIWrapper.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f3e7ff, #d9f7fa);
+            font-family: 'Arial', sans-serif;
+        }
+        .question-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .option-label {
+            transition: background-color 0.2s ease;
+        }
+        .option-label:hover {
+            background-color: #e0f7ff;
+        }
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div id="quiz-container" class="max-w-2xl w-full bg-white rounded-2xl shadow-xl p-8">
+        <h1 class="text-3xl font-bold text-center text-purple-700 mb-6">Discover Your HR Personality! 🌟</h1>
+        <form id="quiz-form">
+            <!-- Question 1 -->
+            <div class="question-card bg-gray-50 p-6 mb-6 rounded-lg">
+                <p class="text-lg font-semibold text-gray-800 mb-4">1. Your favourite way to spend a workday is... 👩‍💼</p>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q1" value="A" class="mr-2" required> A. Brainstorming campaigns or events with teams 👥
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q1" value="B" class="mr-2"> B. Solving policy queries or reviewing regulations 📘
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q1" value="C" class="mr-2"> C. Exploring new dashboards or reports 📊
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q1" value="D" class="mr-2"> D. Coaching or mentoring team members 💬
+                </label>
+            </div>
+            <!-- Question 2 -->
+            <div class="question-card bg-gray-50 p-6 mb-6 rounded-lg">
+                <p class="text-lg font-semibold text-gray-800 mb-4">2. If you had a superpower, it would be... 🦸</p>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q2" value="A" class="mr-2" required> A. Telepathy – to understand employee needs instantly 🧠
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q2" value="B" class="mr-2"> B. Time freeze – to carefully review every document 🕰️
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q2" value="C" class="mr-2"> C. Super processing – crunching numbers at lightning speed ⚡
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q2" value="D" class="mr-2"> D. Talent radar – spotting high-potential candidates in a crowd 🎯
+                </label>
+            </div>
+            <!-- Question 3 -->
+            <div class="question-card bg-gray-50 p-6 mb-6 rounded-lg">
+                <p class="text-lg font-semibold text-gray-800 mb-4">3. Your HR idol is someone who... 🌟</p>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q3" value="A" class="mr-2" required> A. Builds culture and connects people ❤️
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q3" value="B" class="mr-2"> B. Sets gold standards in policies and ethics 🛡️
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q3" value="C" class="mr-2"> C. Drives decision-making through insights 📈
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q3" value="D" class="mr-2"> D. Attracts and retains the best talent 🌱
+                </label>
+            </div>
+            <!-- Question 4 -->
+            <div class="question-card bg-gray-50 p-6 mb-6 rounded-lg">
+                <p class="text-lg font-semibold text-gray-800 mb-4">4. A proud moment at work would be... 🏆</p>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q4" value="A" class="mr-2" required> A. Pulling off a high-energy townhall or festival 🎉
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q4" value="B" class="mr-2"> B. Ensuring 100% audit success with no observations ✅
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q4" value="C" class="mr-2"> C. Presenting a report that shapes business strategy 📊
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q4" value="D" class="mr-2"> D. Watching a team member you coached get promoted 🚀
+                </label>
+            </div>
+            <!-- Question 5 -->
+            <div class="question-card bg-gray-50 p-6 mb-6 rounded-lg">
+                <p class="text-lg font-semibold text-gray-800 mb-4">5. Your workplace mantra is... 💡</p>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q5" value="A" class="mr-2" required> A. "Let’s keep it human." 🤝
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q5" value="B" class="mr-2"> B. "Better safe than sorry." ⚖️
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q5" value="C" class="mr-2"> C. "In data we trust." 📊
+                </label>
+                <label class="option-label block p-3 mb-2 rounded-lg cursor-pointer">
+                    <input type="radio" name="q5" value="D" class="mr-2"> D. "Talent wins games, teamwork wins championships." 🏆
+                </label>
+            </div>
+            <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition-colors">Submit 🚀</button>
+        </form>
+    </div>
+
+    <!-- Result Modal -->
+    <div id="result-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-2xl p-8 max-w-md w-full text-center">
+            <h2 class="text-2xl font-bold text-purple-700 mb-4">Your HR Personality Is...</h2>
+            <p id="result-text" class="text-xl font-semibold text-gray-800 mb-6"></p>
+            <button id="close-modal" class="bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Quiz Logic
+        const form = document.getElementById("quiz-form");
+        const modal = document.getElementById("result-modal");
+        const resultText = document.getElementById("result-text");
+        const closeModal = document.getElementById("close-modal");
+
+        const personalityTypes = {
+            A: "Creative Empath",
+            B: "Compliance Crusader",
+            C: "Data Dynamo",
+            D: "Talent Titan"
+        };
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const answers = [
+                form.q1.value,
+                form.q2.value,
+                form.q3.value,
+                form.q4.value,
+                form.q5.value
+            ];
+
+            // Count occurrences of each answer
+            const counts = { A: 0, B: 0, C: 0, D: 0 };
+            answers.forEach(answer => counts[answer]++);
+
+            // Find the most frequent answer
+            let maxCount = 0;
+            let personality = "A"; // Default to A in case of tie
+            for (const [key, count] of Object.entries(counts)) {
+                if (count > maxCount) {
+                    maxCount = count;
+                    personality = key;
+                }
+            }
+
+            // Display result
+            resultText.textContent = personalityTypes[personality] + " 🎉";
+            modal.classList.remove("hidden");
+
+            // Automatically close the result modal after 5 minutes (300,000 milliseconds)
+            setTimeout(() => {
+                modal.classList.add("hidden");
+            }, 300000);
+        });
+
+        closeModal.addEventListener("click", () => {
+            modal.classList.add("hidden");
+        });
+    </script>
+</body>
+</html>
